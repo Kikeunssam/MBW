@@ -24,8 +24,27 @@ function showIssue(text){
  if(!$('issueDialog').open)$('issueDialog').showModal();
 }
 function save(){if(listening)return;try{localStorage.setItem(key,JSON.stringify(state));}catch{showIssue('이 기기에 저장할 공간이 부족해요. 공유 링크로 작품을 보관하세요.')}}
-function voice(midi,at,volume=.12,bus=master){for(const [ratio,gain,length] of [[1,1,1.45],[2.01,.32,.58],[3.97,.14,.23]]){const osc=ac.createOscillator(),amp=ac.createGain();osc.frequency.value=440*2**((midi-69)/12)*ratio;amp.gain.setValueAtTime(.00001,at);amp.gain.exponentialRampToValueAtTime(volume*gain,at+.008);amp.gain.exponentialRampToValueAtTime(.00001,at+length);osc.connect(amp).connect(bus);osc.start(at);osc.stop(at+length+.01);osc.onended=()=>{osc.disconnect();amp.disconnect()}}}
-async function sound(){if(!ac){ac=new AudioContext();master=ac.createGain();master.gain.value=.65;const comp=ac.createDynamicsCompressor();master.connect(comp).connect(ac.destination)}await ac.resume()}
+// 실제 오르골 녹음 15음(A♭4~A♭6, CC0). 가장 가까운 샘플을 골라 재생 속도로 음높이를 맞춘다.
+// 샘플을 아직 못 읽었거나 디코딩에 실패하면 아래 합성음으로 낸다.
+const NOTE_SAMPLES=@@NOTE_SAMPLES@@;
+const SAMPLE_LEVEL=1.5; // 합성음과 피크·RMS가 비슷해지도록 맞춘 배율 (오프라인 렌더로 측정)
+let sampleBank=null,sampleLoad=null;
+function loadSamples(){
+ if(sampleLoad)return sampleLoad;
+ const decode=b64=>new Promise((ok,fail)=>{const p=ac.decodeAudioData(Uint8Array.from(atob(b64),c=>c.charCodeAt(0)).buffer,ok,fail);if(p&&p.then)p.then(ok,fail)});
+ sampleLoad=Promise.all(Object.entries(NOTE_SAMPLES).map(async([m,b])=>({midi:+m,buf:await decode(b)})))
+  .then(list=>{sampleBank=list.sort((a,b)=>a.midi-b.midi)}).catch(()=>{sampleBank=null});
+ return sampleLoad;
+}
+function voice(midi,at,volume=.12,bus=master){
+ if(sampleBank){
+  let s=sampleBank[0];for(const x of sampleBank)if(Math.abs(x.midi-midi)<Math.abs(s.midi-midi))s=x;
+  const src=ac.createBufferSource(),amp=ac.createGain();
+  src.buffer=s.buf;src.playbackRate.value=2**((midi-s.midi)/12);amp.gain.value=volume*SAMPLE_LEVEL;
+  src.connect(amp).connect(bus);src.start(at);src.onended=()=>{src.disconnect();amp.disconnect()};return;
+ }
+ for(const [ratio,gain,length] of [[1,1,1.45],[2.01,.32,.58],[3.97,.14,.23]]){const osc=ac.createOscillator(),amp=ac.createGain();osc.frequency.value=440*2**((midi-69)/12)*ratio;amp.gain.setValueAtTime(.00001,at);amp.gain.exponentialRampToValueAtTime(volume*gain,at+.008);amp.gain.exponentialRampToValueAtTime(.00001,at+length);osc.connect(amp).connect(bus);osc.start(at);osc.stop(at+length+.01);osc.onended=()=>{osc.disconnect();amp.disconnect()}}}
+async function sound(){if(!ac){ac=new AudioContext();master=ac.createGain();master.gain.value=.65;const comp=ac.createDynamicsCompressor();master.connect(comp).connect(ac.destination)}await ac.resume();await Promise.race([loadSamples(),new Promise(r=>setTimeout(r,400))])}
 function toggle(r,b){if(listening)return;const l=state.level;state.tracks[l][r][b]^=1;if(state.tracks[l][r][b]&&!playing)sound().then(()=>{master.gain.setValueAtTime(.65,ac.currentTime);voice(scales[l][r]+12,ac.currentTime)}).catch(()=>{});save();board();dirty=true}
 const radius=(r,l)=>54+(r+.5)*114/scales[l].length;
 // Both measured sprite landmarks land on (0, 0) before the common

@@ -12,5 +12,9 @@ page=page.replace('@@LESSON@@',uri(p/'music_box_lesson.pdf','application/pdf'))
 palette=json.loads((p.parent/'assets/palette.json').read_text())['colors']
 photo=(p/'photo.js').read_text().replace('@@PHOTO_PALETTE@@',json.dumps([c['hex'] for c in palette]))
 page=page.replace('/* PHOTO_MODULE */',photo).replace('@@WINDER_AUDIO@@',wind_sample)
+# 실제 오르골 한 음 샘플 (BigSoundBank CC0, sounds/CREDITS.md) — MIDI 번호 → base64 AAC
+note_block=(p.parent/'sounds/musicbox-samples.js').read_text().split('  notes: {',1)[1].split('  },',1)[0]
+notes={int(m):b for m,b in re.findall(r'(\d+): "([A-Za-z0-9+/=]+)"',note_block)}
+page=page.replace('@@NOTE_SAMPLES@@',json.dumps(notes))
 lic=(p.parent/'assets/fonts/license.txt').read_text()
 (p.parent/'index.html').write_text(page.replace('</html>','<!-- Galmuri license\n'+lic.replace('--','—')+'\n--></html>'))
