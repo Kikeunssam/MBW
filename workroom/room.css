@@ -325,3 +325,9 @@ dialog.infoPopup.guidePopup[open]{display:flex}
  .guideText h3{font-size:1rem;margin-bottom:3px}
  .guideMore{display:none}
 }
+
+/* 음 편집 표 머리줄: 제목은 왼쪽, '태엽 감기'와 '닫기'는 오른쪽에 나란히. 태엽 감기에는 열쇠 아이콘 */
+#gridDialog .zoomBar{justify-content:flex-start;gap:8px}
+#gridDialog .zoomBar h2{margin-right:auto}
+#gridDialog .zoomBar button{display:inline-flex;align-items:center;gap:6px}
+#gridWind .btnIcon{width:26px;height:26px;margin:-4px 0;image-rendering:auto}

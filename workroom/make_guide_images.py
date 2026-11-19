@@ -165,8 +165,9 @@ pen.box(x + 98, y + 72, 618, 46, 2)
 pen.badge(2, x + 98, y + 72)
 pen.ring(x + 156, y + 202, 22)
 pen.badge(3, x + 184, y + 182)
-pen.box(x + 462, y + 20, 83, 32, 2)
-pen.badge(4, x + 450, y + 36)
+gx, gy, gw, gh = rc('gridWind')
+pen.box(gx, gy, gw, gh, 2)
+pen.badge(4, gx - 14, gy + gh / 2)
 save(im, 'table')
 
 # 5. 원판 크게 보기

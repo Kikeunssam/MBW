@@ -74,7 +74,7 @@ rects.holes = await evalJS(`[...document.querySelectorAll('#plate [data-r]')].sl
 
 // Table editing
 await evalJS(`$('switchView').click()`); await sleep(700);
-await rect('gridDialog', '#gridDialog'); await shot('desk_table');
+await rect('gridDialog', '#gridDialog'); await rect('gridWind', '#gridWind'); await shot('desk_table');
 await evalJS(`$('gridDialog').close()`); await sleep(300);
 // Disc zoom
 await evalJS(`$('zoom').click()`); await sleep(700);
