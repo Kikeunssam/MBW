@@ -1,0 +1,348 @@
+{
+  "version": 2,
+  "color_count": 64,
+  "alpha_values": [
+    0,
+    255
+  ],
+  "colors": [
+    {
+      "name": "night_0",
+      "hex": "#14192f"
+    },
+    {
+      "name": "night_1",
+      "hex": "#242646"
+    },
+    {
+      "name": "night_2",
+      "hex": "#363d64"
+    },
+    {
+      "name": "night_3",
+      "hex": "#4c5c8a"
+    },
+    {
+      "name": "night_4",
+      "hex": "#7285b1"
+    },
+    {
+      "name": "snow_0",
+      "hex": "#657fa6"
+    },
+    {
+      "name": "snow_1",
+      "hex": "#93abd0"
+    },
+    {
+      "name": "snow_2",
+      "hex": "#b8c9e4"
+    },
+    {
+      "name": "snow_3",
+      "hex": "#d9e3f2"
+    },
+    {
+      "name": "snow_4",
+      "hex": "#f4f1eb"
+    },
+    {
+      "name": "brass_0",
+      "hex": "#51303b"
+    },
+    {
+      "name": "brass_1",
+      "hex": "#885039"
+    },
+    {
+      "name": "brass_2",
+      "hex": "#bd793e"
+    },
+    {
+      "name": "brass_3",
+      "hex": "#eab456"
+    },
+    {
+      "name": "brass_4",
+      "hex": "#ffe09a"
+    },
+    {
+      "name": "wood_0",
+      "hex": "#2e1c30"
+    },
+    {
+      "name": "wood_1",
+      "hex": "#4f293a"
+    },
+    {
+      "name": "wood_2",
+      "hex": "#794035"
+    },
+    {
+      "name": "wood_3",
+      "hex": "#a75d3d"
+    },
+    {
+      "name": "wood_4",
+      "hex": "#d58b57"
+    },
+    {
+      "name": "red_0",
+      "hex": "#511e3c"
+    },
+    {
+      "name": "red_1",
+      "hex": "#81233e"
+    },
+    {
+      "name": "red_2",
+      "hex": "#b83248"
+    },
+    {
+      "name": "red_3",
+      "hex": "#e45259"
+    },
+    {
+      "name": "red_4",
+      "hex": "#ff9390"
+    },
+    {
+      "name": "fir_0",
+      "hex": "#102e36"
+    },
+    {
+      "name": "fir_1",
+      "hex": "#174a43"
+    },
+    {
+      "name": "fir_2",
+      "hex": "#28654b"
+    },
+    {
+      "name": "fir_3",
+      "hex": "#54804c"
+    },
+    {
+      "name": "fir_4",
+      "hex": "#8ca95e"
+    },
+    {
+      "name": "light_0",
+      "hex": "#9d492e"
+    },
+    {
+      "name": "light_1",
+      "hex": "#d47733"
+    },
+    {
+      "name": "light_2",
+      "hex": "#ffa94c"
+    },
+    {
+      "name": "light_3",
+      "hex": "#ffd677"
+    },
+    {
+      "name": "light_4",
+      "hex": "#fff0be"
+    },
+    {
+      "name": "stone_0",
+      "hex": "#343148"
+    },
+    {
+      "name": "stone_1",
+      "hex": "#575069"
+    },
+    {
+      "name": "stone_2",
+      "hex": "#80758c"
+    },
+    {
+      "name": "stone_3",
+      "hex": "#a69ab0"
+    },
+    {
+      "name": "stone_4",
+      "hex": "#d2c5d3"
+    },
+    {
+      "name": "bronze_0",
+      "hex": "#744b44"
+    },
+    {
+      "name": "bronze_1",
+      "hex": "#a47b57"
+    },
+    {
+      "name": "bronze_2",
+      "hex": "#d4aa73"
+    },
+    {
+      "name": "bronze_3",
+      "hex": "#edc99a"
+    },
+    {
+      "name": "teal_0",
+      "hex": "#1b405c"
+    },
+    {
+      "name": "teal_1",
+      "hex": "#2e5d78"
+    },
+    {
+      "name": "teal_2",
+      "hex": "#49869b"
+    },
+    {
+      "name": "teal_3",
+      "hex": "#78b7bd"
+    },
+    {
+      "name": "berry_0",
+      "hex": "#3c244b"
+    },
+    {
+      "name": "berry_1",
+      "hex": "#633855"
+    },
+    {
+      "name": "berry_2",
+      "hex": "#905064"
+    },
+    {
+      "name": "berry_3",
+      "hex": "#c48185"
+    },
+    {
+      "name": "silver_0",
+      "hex": "#505e76"
+    },
+    {
+      "name": "silver_1",
+      "hex": "#8194ae"
+    },
+    {
+      "name": "silver_2",
+      "hex": "#becbd5"
+    },
+    {
+      "name": "silver_3",
+      "hex": "#eee4d5"
+    },
+    {
+      "name": "walnut_mid",
+      "hex": "#633331"
+    },
+    {
+      "name": "copper_mid",
+      "hex": "#965338"
+    },
+    {
+      "name": "brass_mid",
+      "hex": "#d89b4b"
+    },
+    {
+      "name": "brass_pale",
+      "hex": "#f5ce7d"
+    },
+    {
+      "name": "snow_mid",
+      "hex": "#a8b9d9"
+    },
+    {
+      "name": "night_mid",
+      "hex": "#414d78"
+    },
+    {
+      "name": "green_mid",
+      "hex": "#3b744e"
+    },
+    {
+      "name": "wine_mid",
+      "hex": "#6a2945"
+    }
+  ],
+  "ramps": {
+    "night": [
+      "night_0",
+      "night_1",
+      "night_2",
+      "night_3",
+      "night_4"
+    ],
+    "snow": [
+      "snow_0",
+      "snow_1",
+      "snow_2",
+      "snow_3",
+      "snow_4"
+    ],
+    "brass": [
+      "brass_0",
+      "brass_1",
+      "brass_2",
+      "brass_3",
+      "brass_4"
+    ],
+    "wood": [
+      "wood_0",
+      "wood_1",
+      "wood_2",
+      "wood_3",
+      "wood_4"
+    ],
+    "red": [
+      "red_0",
+      "red_1",
+      "red_2",
+      "red_3",
+      "red_4"
+    ],
+    "fir": [
+      "fir_0",
+      "fir_1",
+      "fir_2",
+      "fir_3",
+      "fir_4"
+    ],
+    "light": [
+      "light_0",
+      "light_1",
+      "light_2",
+      "light_3",
+      "light_4"
+    ],
+    "stone": [
+      "stone_0",
+      "stone_1",
+      "stone_2",
+      "stone_3",
+      "stone_4"
+    ],
+    "bronze": [
+      "bronze_0",
+      "bronze_1",
+      "bronze_2",
+      "bronze_3"
+    ],
+    "teal": [
+      "teal_0",
+      "teal_1",
+      "teal_2",
+      "teal_3"
+    ],
+    "berry": [
+      "berry_0",
+      "berry_1",
+      "berry_2",
+      "berry_3"
+    ],
+    "silver": [
+      "silver_0",
+      "silver_1",
+      "silver_2",
+      "silver_3"
+    ]
+  }
+}

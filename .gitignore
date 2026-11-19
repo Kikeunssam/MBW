@@ -1,0 +1,32 @@
+# 배포·빌드에 필요 없는 작업 재료 (로컬에만 둔다)
+*.zip
+generated_images/
+musicbox_delivery/
+musicbox_v2/
+interior_downloads/
+mechanism_refs/
+hosted-workroom/
+music_box_workroom.html
+README_legacy_canvas.md
+codex_request_assets_v2.md
+__pycache__/
+.DS_Store
+.claude/
+
+# 예전 실린더형 캔버스 앱 (지금 사이트는 workroom 빌드 결과인 index.html)
+app.js
+assets.js
+audio.js
+chords.js
+drum.js
+events.js
+layout.js
+scene.js
+storage.js
+style.css
+ui.js
+tools/
+assets/*
+!assets/fonts/
+!assets/palette.json
+sounds/musicbox-samples.js.bak
