@@ -1,0 +1,16 @@
+{
+  "indexes": [],
+  "fieldOverrides": [
+    {
+      "collectionGroup": "works",
+      "fieldPath": "e",
+      "ttl": true,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "works",
+      "fieldPath": "d",
+      "indexes": []
+    }
+  ]
+}

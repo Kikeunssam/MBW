@@ -15,7 +15,7 @@ function readWork(v){
  const photo=v.photo||photos?.[theme]||photos?.find(Boolean)||null;
  return {version,theme:photos?.[theme]?4:theme,level,tracks,title,photo,lengths:v.lengths};
 }
-const listening=location.hash.startsWith("#listen=");
+const listening=location.hash.startsWith("#listen=")||location.hash.startsWith("#w=");
 let state=fresh();if(!listening)try{const s=JSON.parse(localStorage.getItem(key));if(valid(s))state=readWork(s)}catch{}
 let tableView=false, playing=false, time=0, phase=0, ac, master, timer, session=0;
 const images={}, C=$('globe').getContext('2d');let dirty=true;
