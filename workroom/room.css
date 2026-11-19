@@ -248,3 +248,40 @@ dialog.infoPopup,dialog#explain.infoPopup[open]{box-sizing:border-box;position:f
  .listening .workLinks{grid-column:1}
 }
 @media(max-width:480px){.workLinks{justify-content:center}.workLinks :is(a,button){padding-inline:5px}}
+
+/* 휴대폰은 가로 화면만: 세로로 들면 앱을 가리고 돌려 달라는 안내를 띄운다.
+   (iPhone Safari 등은 웹페이지가 화면 방향을 고정할 수 없어서 안내로 처리한다. 태블릿·PC는 그대로) */
+#rotateHint{display:none}
+@media (orientation:portrait) and (pointer:coarse) and (max-width:600px){
+ main{visibility:hidden}
+ #rotateHint{display:flex;position:fixed;inset:0;z-index:2147483647;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px;text-align:center;background:#14192f;color:#fff0cd}
+ #rotateHint p{margin:0;font-size:22px;line-height:1.4}
+ #rotateHint b{color:#e8bd79}
+ #rotateHint small{font-size:14px;color:#c9b79a}
+ .rotatePhone{width:64px;height:104px;border:5px solid #e8bd79;border-radius:12px;position:relative;animation:turnPhone 2.4s ease-in-out infinite}
+ .rotatePhone i{position:absolute;left:50%;bottom:6px;width:12px;height:4px;margin-left:-6px;border-radius:2px;background:#e8bd79}
+}
+@keyframes turnPhone{0%,25%{transform:rotate(0)}55%,85%{transform:rotate(-90deg)}100%{transform:rotate(0)}}
+@media (prefers-reduced-motion:reduce){.rotatePhone{animation:none;transform:rotate(-90deg)}}
+
+/* 휴대폰 (터치 + 가로 높이 500px 이하): 위 메뉴는 '연주 원리'만, 작은 가로 화면도 두 칸 배치,
+   상자 속 원판은 눌러도 반응하지 않는다 (원판 확대 창 안의 원판은 그대로 편집) */
+@media (pointer:coarse) and (max-height:500px), (pointer:coarse) and (max-width:600px){
+ .workLinks a,.workLinks #creditsButton{display:none}
+ .instrument #editor{pointer-events:none}
+}
+@media (pointer:coarse) and (max-height:500px) and (orientation:landscape){
+ .workspace{grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);gap:10px;min-height:calc(100svh - 8px)}
+ .instrument{width:min(92%,calc((100svh - 16px)*.89));left:-3%}
+ .folio{max-height:calc(100svh - 64px);margin-top:20px;overflow:auto;padding:8px 10px;gap:6px;font-size:13px}
+ .folio button,.folio select,.folio #zoom,.folio #play{font-size:12px;padding:3px 6px;white-space:nowrap}
+ .folio h2{font-size:17px;margin:0}.wordmark{max-height:44px}
+ #themes{grid-template-columns:repeat(2,1fr)}
+ .workLinks button{font-size:12px;padding:3px 8px}
+ body>main,body>main:has(#explain){padding-top:0;position:relative}
+ .workLinks{position:absolute;top:4px;right:6px;padding:0;width:auto;z-index:5}
+ .workspace{min-height:100svh}
+ footer{position:absolute;right:8px;bottom:2px;padding:0;font-size:10px}
+ #rules{font-size:12px}
+ :is(#pitchCount,#discLength) label span{font-size:12px;padding:3px 5px;white-space:nowrap}
+}

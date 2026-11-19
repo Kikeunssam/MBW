@@ -19,6 +19,9 @@ const listening=location.hash.startsWith("#listen=");
 let state=fresh();if(!listening)try{const s=JSON.parse(localStorage.getItem(key));if(valid(s))state=readWork(s)}catch{}
 let tableView=false, playing=false, time=0, phase=0, ac, master, timer, session=0;
 const images={}, C=$('globe').getContext('2d');let dirty=true;
+// 휴대폰(터치 + 작은 화면): 상자 속 원판은 보기만 하고, 편집은 '원판 확대'·'표로 편집'에서 한다
+const phoneQuery=matchMedia('(pointer:coarse) and (max-height:500px), (pointer:coarse) and (max-width:600px)');
+const isPhone=()=>phoneQuery.matches;
 function showIssue(text){
  $('issueText').textContent=text;
  if(!$('issueDialog').open)$('issueDialog').showModal();
@@ -111,7 +114,7 @@ html+=measureEngravings(n,beatsPerMeasure(l));
 for(let b=0;b<n;b++){const a=b*TAU/n,co=Math.cos(a),si=Math.sin(a);html+='<path d="M'+(co*50)+' '+(si*50)+'L'+(co*170)+' '+(si*170)+'" stroke="#8d6330" stroke-width=".6"/><text x="'+co*181+'" y="'+(si*181+4)+'" fill="#35251f" font-size="11" text-anchor="middle">'+(b+1)+'</text>'}
 for(let r=0;r<t.length;r++){const rad=radius(r,l);html+='<circle r="'+rad+'" fill="none" stroke="#94682f" stroke-width=".8"/>';for(let b=0;b<n;b++){const a=b*TAU/n,x=rad*Math.cos(a),y=rad*Math.sin(a),on=t[r][b],sz=Math.min(9,42/t.length+1,rad*Math.sin(Math.PI/n)*.92);html+='<g class="hole" role="button" tabindex="'+(r===0&&b===0?'0':'-1')+'" aria-label="'+note(scales[l][r])+' '+(b+1)+'박" aria-pressed="'+!!on+'" data-r="'+r+'" data-b="'+b+'" transform="translate('+x+' '+y+')"><title>'+note(scales[l][r])+' · '+(b+1)+'박</title><circle r="'+Math.min(13,55/t.length,rad*Math.sin(Math.PI/n))+'" fill="transparent"/><use href="#spr-'+(on?'punched':'blank')+'" transform="translate('+(-sz)+' '+(-sz)+') scale('+sz*2/15+')"/></g>'}}
 svg.innerHTML=html+'</g>'+fittingImage(fittings.roller)+'<g id="sparks" pointer-events="none" aria-hidden="true"></g>';cursor();
-$('count').textContent=t.length+'음 × '+n+'칸 · '+t.flat().reduce((a,b)=>a+b,0)+'음 선택';$('rules').textContent=['안쪽부터 도·미·솔·높은 도예요. 동그라미를 눌러 음을 찍으세요.','6음으로 세 박씩 묶어 왈츠를 만들어요.','도부터 높은 도까지 선율을 만들어요.','반음을 포함한 열두 음으로 선율을 만들어요.'][l];document.querySelectorAll('#discLength input').forEach((input,i)=>{
+$('count').textContent=t.length+'음 × '+n+'칸 · '+t.flat().reduce((a,b)=>a+b,0)+'음 선택';$('rules').textContent=(isPhone()?'원판 확대나 표로 편집에서 음을 찍어요. ':'')+['안쪽부터 도·미·솔·높은 도예요. 동그라미를 눌러 음을 찍으세요.','6음으로 세 박씩 묶어 왈츠를 만들어요.','도부터 높은 도까지 선율을 만들어요.','반음을 포함한 열두 음으로 선율을 만들어요.'][l];document.querySelectorAll('#discLength input').forEach((input,i)=>{
  const length=shortSteps[l]*(i+1);
  input.value=length;input.checked=length===n;
  input.nextElementSibling.textContent=length+'칸 · '+length/beatsPerMeasure(l)+'마디';
@@ -309,6 +312,7 @@ function closestHole(event){
   return best;
 }
 for(const id of ['plate','table'])$(id).onclick=e=>{
+  if(id==='plate'&&isPhone()&&!$('magnifier').open)return;   // 휴대폰: 상자 속 원판은 터치해도 그대로
   const target=e.target.closest('[data-r]');
   const hole=target?target.dataset:id==='plate'?closestHole(e):null;
   if(!hole)return;
