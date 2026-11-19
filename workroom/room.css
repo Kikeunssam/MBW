@@ -305,7 +305,7 @@ dialog.infoPopup.guidePopup[open]{display:flex}
 .guideSlide{display:grid;gap:10px}
 .guideSlide[hidden]{display:none}
 .guideSlide figure{margin:0;display:flex;justify-content:center;background:#211a22;border:1px solid #6d5236;padding:6px}
-.guideSlide img{display:block;max-width:100%;max-height:min(46svh,420px);object-fit:contain;image-rendering:auto}
+.guideSlide img{display:block;max-width:100%;max-height:min(41svh,390px);object-fit:contain;image-rendering:auto}
 .guideText h3{margin:0 0 6px;font:1.12rem gal,serif;color:#f1d68e}
 .guideText p{margin:0 0 4px;line-height:1.6}
 .guideText .n,.guideTip::before{display:inline-grid;place-items:center;min-width:1.35em;height:1.35em;margin-right:4px;border-radius:50%;background:#e8bd79;color:#211824;font:700 .8rem/1 var(--reading);vertical-align:.1em}
@@ -334,3 +334,18 @@ dialog.infoPopup.guidePopup[open]{display:flex}
 
 /* 이름판 안내 문구 "작품 제목을 입력하세요"가 작은 화면에서도 이름판 안에 들어가게 */
 .nameplate input::placeholder{font-size:clamp(8.5px,2.25cqw,20px)}
+
+/* 휴대폰 가로 화면: 사진 편집 창을 두 칸(왼쪽 미리보기, 오른쪽 조절)으로 — 한 화면에 들어가게 */
+@media (pointer:coarse) and (max-height:500px) and (orientation:landscape){
+ #photoDialog{width:calc(100vw - 16px);max-height:calc(100svh - 12px);padding:10px 14px}
+ #photoDialog[open]{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);column-gap:14px;align-content:start}
+ #photoDialog h2{grid-column:1/-1;padding-bottom:.35rem}
+ #photoDialog #photoTip{grid-column:1;grid-row:2;margin:.4rem 0 .3rem;font-size:.82rem}
+ #photoPreview{grid-column:1;grid-row:3/span 4;align-self:start}
+ #photoDialog fieldset,#photoDialog .photoScale,#photoDialog .wipeActions{grid-column:2}
+ #photoDialog fieldset{margin:.35rem 0}
+ #photoDialog fieldset label{padding:.15rem .5rem;font-size:.85rem}
+ #photoDialog legend{margin-bottom:.15rem;font-size:.85rem}
+ #photoDialog .wipeActions{margin-top:.4rem}
+}
+@media (pointer:coarse) and (max-height:500px) and (orientation:landscape){dialog.infoPopup:not(.guidePopup){padding:12px 14px;max-height:calc(100svh - 12px)}}

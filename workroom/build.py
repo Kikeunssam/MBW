@@ -11,7 +11,7 @@ for icon in (p/'stage').glob('nav_*.png'):
 # 수업 활동지는 페이지에 넣지 않고 index.html 옆의 별도 파일로 둔다 (첫 화면을 가볍게)
 import shutil
 shutil.copyfile(p/'music_box_lesson.pdf', p.parent/'music_box_lesson.pdf')
-page=page.replace('@@LESSON@@','music_box_lesson.pdf')
+page=page.replace('@@LESSON@@','music_box_lesson.pdf').replace('@@FAVICON@@',uri(p/'favicon.png','image/png'))
 # '사용 방법' 그림 (workroom/guide/*.png, tools: workroom/make_guide_images.py)
 for shot in (p/'guide').glob('*.png'):
     page=page.replace('@@GUIDE_'+shot.stem+'@@',uri(shot,'image/png'))

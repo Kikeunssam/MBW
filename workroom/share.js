@@ -28,6 +28,11 @@ async function packWork(){
 // 보안 규칙(firestore.rules)이 24시간이 지난 작품은 열지 못하게 막고, TTL이 나중에 지운다.
 const FIRESTORE='https://firestore.googleapis.com/v1/projects/mbworkroom-75288/databases/(default)/documents';
 const SHARE_HOURS=24;
+// 오래된 브라우저(iOS 15 이하 등)에는 AbortSignal.timeout이 없어서 직접 만든다
+function timeoutSignal(ms){
+ if(AbortSignal.timeout)return AbortSignal.timeout(ms);
+ const c=new AbortController();setTimeout(()=>c.abort(),ms);return c.signal;
+}
 const CODE_CHARS='abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 function newCode(){
  const r=crypto.getRandomValues(new Uint8Array(8));
@@ -36,7 +41,7 @@ function newCode(){
 async function saveShort(packed){
  for(let attempt=0;attempt<3;attempt++){
   const code=newCode(),expire=new Date(Date.now()+SHARE_HOURS*3600e3).toISOString();
-  const res=await fetch(FIRESTORE+':commit',{method:'POST',headers:{'Content-Type':'application/json'},signal:AbortSignal.timeout(8000),
+  const res=await fetch(FIRESTORE+':commit',{method:'POST',headers:{'Content-Type':'application/json'},signal:timeoutSignal(8000),
    body:JSON.stringify({writes:[{
     update:{name:'projects/mbworkroom-75288/databases/(default)/documents/works/'+code,fields:{d:{stringValue:packed},e:{timestampValue:expire}}},
     updateTransforms:[{fieldPath:'t',setToServerValue:'REQUEST_TIME'}],
@@ -78,7 +83,7 @@ async function openListeningRoom(){
    if(location.hash.startsWith('#w=')){
      const code=location.hash.slice(3);
      if(!/^[A-Za-z0-9]{8}$/.test(code))throw Error();
-     const res=await fetch(FIRESTORE+'/works/'+code,{signal:AbortSignal.timeout(10000)});
+     const res=await fetch(FIRESTORE+'/works/'+code,{signal:timeoutSignal(10000)});
      if(res.status===403||res.status===404){showIssue('이 공유 링크는 열 수 있는 기간(24시간)이 지났거나 없는 링크예요. 보낸 사람에게 새 링크를 받아 주세요.');return}
      if(!res.ok)throw Error();
      encoded=(await res.json()).fields.d.stringValue;
@@ -88,11 +93,14 @@ async function openListeningRoom(){
  }catch{showIssue('감상 링크를 읽을 수 없어요. 보낸 사람에게 링크를 다시 받아 주세요.')}
 }
 $('shareWork').onclick=async()=>{
+ const btn=$('shareWork');if(btn.disabled)return;
+ const label=btn.textContent;btn.disabled=true;btn.textContent='링크 만드는 중…';
  try{
    $('shareUrl').value=await encodeLink();
    $('shareNote').textContent=lastLinkShort?'이 링크를 열면 태엽을 감아 작품을 들을 수 있어요. 링크는 24시간 동안 열 수 있어요.':'이 링크를 열면 태엽을 감아 작품을 들을 수 있어요.';
    $('shareDialog').showModal();$('copyShare').focus();
  }catch{showIssue('공유 링크를 만들 수 없어요. 최신 브라우저에서 다시 열어 주세요.')}
+ finally{btn.disabled=false;btn.textContent=label}
 };
 $('shareClose').onclick=()=>$('shareDialog').close();
 $('copyShare').onclick=async()=>{
