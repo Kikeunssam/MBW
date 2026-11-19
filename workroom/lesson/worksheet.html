@@ -2,126 +2,227 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<title>오르골당 음악 창작 활동지</title>
+<title>나는 오르골 작곡가 · 오르골당 활동지</title>
 <style>
-@font-face{font-family:gal;src:url(../../assets/fonts/galmuri11.ttf)}
-@page{size:A4;margin:12mm 13mm}
+@page{size:A4;margin:0}
+:root{--ink:#3a2716;--brown:#6b4a2b;--gold:#a8813f;--gold2:#cdb07a;--red:#8e2b22;--paper:#f4ead3;--paper2:#fbf5e6;--soft:#6e5a43}
 *{box-sizing:border-box}
 html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-body{margin:0;font:10.5pt/1.55 "Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;color:#222;word-break:keep-all}
-.page{height:272mm;display:flex;flex-direction:column;gap:4mm;break-after:page;position:relative}
-.page:last-child{break-after:auto}
-header.top{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2.2pt solid #5a3a28;padding-bottom:2.5mm}
-.brand{font:9pt gal,sans-serif;color:#8a5a2b;letter-spacing:.5pt}
-h1{margin:1mm 0 0;font:21pt gal,sans-serif;color:#3b2418}
-.who{font-size:10pt;white-space:nowrap}
-.who span{display:inline-block;border-bottom:1pt solid #555;min-width:13mm;margin:0 3mm 0 1.5mm}
-.who span.name{min-width:30mm;margin-right:0}
-h2{margin:0 0 2mm;font:13.5pt gal,sans-serif;color:#3b2418;display:flex;align-items:center;gap:2.5mm}
-h2 b{display:inline-grid;place-items:center;width:7mm;height:7mm;border-radius:50%;background:#e8bd79;color:#3b2418;font:11pt gal,sans-serif}
-.lead{margin:0 0 2.5mm;color:#444}
-section{border:1pt solid #c9a777;border-radius:2.5mm;padding:3.5mm 4.5mm}
-/* 1. 사용 방법 */
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:3mm}
-.step{display:flex;flex-direction:column;gap:1.5mm}
-.step img{width:100%;height:24mm;object-fit:cover;border:.8pt solid #8a6a45;border-radius:1.5mm}
-.step p{margin:0;font-size:9.4pt;line-height:1.45}
-.step p b{color:#7a3f1c}
-.num{display:inline-grid;place-items:center;width:5mm;height:5mm;border-radius:50%;background:#3b2418;color:#fff;font:8pt gal,sans-serif;margin-right:1mm;vertical-align:.3mm}
-/* 2. 어떤 음악 */
-.row{display:flex;gap:3mm;align-items:baseline;margin:1.8mm 0}
-.row .q{flex:none;font-weight:600;color:#3b2418}
-.chips{display:flex;flex-wrap:wrap;gap:2mm 3.5mm}
-.chips span::before{content:"";display:inline-block;width:3.6mm;height:3.6mm;border:1pt solid #555;border-radius:.6mm;margin-right:1.2mm;vertical-align:-.6mm}
-.line{flex:1;border-bottom:1pt solid #777;height:6mm}
-.lines .line{display:block;margin-top:2mm}
-.choose{display:flex;gap:5mm}
-.choose span{border:1pt solid #999;border-radius:5mm;padding:.3mm 3mm}
-.hint{font-size:9pt;color:#6b5a48}
-/* 3. 그림 칸 (뚜껑 풍경과 같은 8:3) */
-.frame{position:relative;width:94%;aspect-ratio:8/3;border:2.4pt solid #3b2418;outline:1pt solid #3b2418;outline-offset:1.6mm;margin:5mm auto 6.5mm}
-.frame i{position:absolute;width:5mm;height:5mm;border-color:#c0392b;border-style:solid;border-width:0}
-.frame i:nth-child(1){left:-4mm;top:-4mm;border-left-width:1.2pt;border-top-width:1.2pt}
-.frame i:nth-child(2){right:-4mm;top:-4mm;border-right-width:1.2pt;border-top-width:1.2pt}
-.frame i:nth-child(3){left:-4mm;bottom:-4mm;border-left-width:1.2pt;border-bottom-width:1.2pt}
-.frame i:nth-child(4){right:-4mm;bottom:-4mm;border-right-width:1.2pt;border-bottom-width:1.2pt}
-.frame em{position:absolute;right:2mm;bottom:1.5mm;font:normal 8pt sans-serif;color:#aaa}
-.upload{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm;margin-top:1mm}
-.upload div{background:#f7efe2;border-radius:2mm;padding:2.2mm 3mm;font-size:9.3pt;line-height:1.45}
-.upload div b{display:block;color:#7a3f1c;margin-bottom:.5mm}
-/* 4. 친구 감상 */
-table{width:100%;border-collapse:collapse;font-size:9.6pt}
-th,td{border:1pt solid #8a6a45;padding:1.6mm 2mm;text-align:left;vertical-align:top}
-th{background:#f3e6d0;color:#3b2418;font-weight:600}
-td{height:16mm}
-td.small{height:9mm}
-.feel{font-size:8.6pt;color:#6b5a48}
-footer{margin-top:auto;display:flex;justify-content:space-between;font-size:8pt;color:#8a7560;border-top:.8pt solid #c9a777;padding-top:1.5mm}
+body{margin:0;font:10pt/1.55 "AppleMyungjo","Nanum Myeongjo","Batang","Noto Serif KR",serif;color:var(--ink);word-break:keep-all;background:var(--paper)}
+
+/* 한 장 = A4. 양피지 바탕 + 이중 테두리 + 모서리 장식 */
+.sheet{width:210mm;height:297mm;padding:9mm;position:relative;break-after:page;background:var(--paper);overflow:hidden}
+.sheet:last-child{break-after:auto}
+.frame{position:absolute;inset:6mm;border:1.6pt solid var(--brown);pointer-events:none}
+.frame::after{content:"";position:absolute;inset:1.6mm;border:.6pt solid var(--gold)}
+.corner{position:absolute;width:15mm;height:15mm;fill:none;stroke:var(--brown);stroke-width:1.1}
+.corner.tl{left:4.2mm;top:4.2mm}.corner.tr{right:4.2mm;top:4.2mm;transform:scaleX(-1)}
+.corner.bl{left:4.2mm;bottom:4.2mm;transform:scaleY(-1)}.corner.br{right:4.2mm;bottom:4.2mm;transform:scale(-1,-1)}
+.page{position:relative;height:100%;padding:6mm 7mm 5mm;display:flex;flex-direction:column;gap:3.4mm}
+
+/* ---------- 머리 ---------- */
+.hero{display:grid;grid-template-columns:1fr 40mm;gap:6mm;align-items:center;padding-bottom:3mm;border-bottom:.8pt solid var(--gold)}
+.logo{display:block;height:15mm;margin:0 0 1mm -1mm}
+h1{margin:1.6mm 0 .4mm;font:700 26pt/1.15 "AppleMyungjo","Nanum Myeongjo","Batang",serif;letter-spacing:1pt;color:var(--ink)}
+.sub{margin:0 0 3mm;font-size:9.8pt;color:var(--soft)}
+.orn{color:var(--gold);font-size:11pt}
+.who{display:flex;gap:3.6mm;font-size:9.6pt;white-space:nowrap;align-items:flex-end}
+.who span{display:inline-block;border-bottom:.9pt solid var(--ink);margin-left:1.4mm}
+.qr{border:1.4pt solid var(--brown);outline:.6pt solid var(--gold);outline-offset:-2.4mm;background:var(--paper2);padding:3.4mm 3mm 2.6mm;text-align:center}
+.qr img{width:26mm;height:26mm;display:block;margin:0 auto 1.4mm}
+.qr span{font-size:8.2pt;line-height:1.35;color:var(--brown);display:block}
+
+/* ---------- 장(章) 공통 ---------- */
+.chap{position:relative;background:var(--paper2);border:1pt solid var(--brown);outline:.5pt solid var(--gold2);outline-offset:-1.6mm;padding:3.8mm 5mm 4mm}
+.chap h2{display:flex;align-items:baseline;gap:3mm;margin:0 0 2mm;font:700 13.5pt "AppleMyungjo","Nanum Myeongjo","Batang",serif}
+.label{display:inline-block;padding:.4mm 3mm .5mm;background:var(--brown);color:var(--paper2);font:700 8.4pt "AppleMyungjo","Nanum Myeongjo",serif;letter-spacing:1pt;position:relative;top:-.4mm}
+.label.learn{background:var(--gold);color:#fff}
+.lead{margin:0 0 2.4mm;color:var(--soft);font-size:9.4pt}
+
+/* ---------- 연주 원리 ---------- */
+.flow{display:grid;grid-template-columns:1fr 5mm 1fr 5mm 1fr 5mm 1fr;align-items:start}
+.flow .arrow{align-self:center;margin-top:-9mm;text-align:center;color:var(--gold);font-size:12pt}
+.how{text-align:center}
+.how .pic{height:23mm;display:flex;align-items:center;justify-content:center}
+.how .pic img{max-height:22mm;max-width:28mm}
+.how p{margin:1.2mm 0 0;font-size:8.9pt;line-height:1.42}
+.how p b{display:block;font-size:9.8pt;color:var(--brown);margin-bottom:.3mm}
+.fact{margin:2.8mm 0 0;padding:1.6mm 3.4mm;border-top:.6pt solid var(--gold2);border-bottom:.6pt solid var(--gold2);font-size:9.2pt;text-align:center}
+.fact b{color:var(--red);margin-right:1.6mm}
+
+/* ---------- 미션 1 ---------- */
+.quiz{margin:0;padding:0;list-style:none;display:grid;gap:2.3mm}
+.quiz li{display:flex;align-items:center;gap:1.6mm;font-size:9.8pt;flex-wrap:wrap}
+.quiz li > i{flex:none;font-style:normal;font-weight:700;color:var(--brown);width:6mm}
+.pick{display:inline-flex;gap:1.8mm;margin:0 .8mm}
+.pick span{border:.8pt solid var(--brown);border-radius:4mm;padding:0 2.6mm;background:#fff9ee;white-space:nowrap}
+
+/* ---------- 미션 2 ---------- */
+.moods{display:flex;flex-wrap:wrap;gap:1.8mm 2.6mm;margin-bottom:1mm}
+.moods span{display:inline-flex;align-items:center;gap:1.3mm;font-size:9.6pt}
+.moods span::before{content:"";width:3.3mm;height:3.3mm;border:.9pt solid var(--ink)}
+.field{display:flex;align-items:flex-end;gap:2.5mm;margin-top:2.3mm;font-size:9.6pt}
+.field b{flex:none}
+.field .ln{flex:1;border-bottom:.8pt solid var(--soft);height:6mm}
+.field small{flex:none;color:var(--soft);font-size:8.4pt}
+.ex{margin:.6mm 0 0;font-size:8.4pt;color:var(--soft)}
+.titleplate{margin-top:auto;display:flex;align-items:center;gap:3mm;padding:2.4mm 4mm;border:1.2pt solid var(--brown);outline:.5pt solid var(--gold);outline-offset:-1.4mm;background:#fff9ee}
+.titleplate b{font-size:10.6pt;white-space:nowrap}
+.titleplate .ln{flex:1;border-bottom:1pt solid var(--ink);height:7.5mm}
+
+/* ---------- 미션 3: 그림 칸 (뚜껑 풍경과 같은 8:3) ---------- */
+.picture{position:relative;margin:6mm auto 9mm;width:132mm}
+.picture .canvas{width:100%;aspect-ratio:8/3;background:#fffdf7;border:3pt solid var(--brown);outline:1.2pt solid var(--gold);outline-offset:1.4mm;box-shadow:0 0 0 3.2mm var(--paper2),0 0 0 3.8mm var(--brown)}
+.picture i{position:absolute;width:6mm;height:6mm;border:0 solid var(--red)}
+.picture i:nth-of-type(1){left:-6.4mm;top:-6.4mm;border-left-width:1.5pt;border-top-width:1.5pt}
+.picture i:nth-of-type(2){right:-6.4mm;top:-6.4mm;border-right-width:1.5pt;border-top-width:1.5pt}
+.picture i:nth-of-type(3){left:-6.4mm;bottom:-6.4mm;border-left-width:1.5pt;border-bottom-width:1.5pt}
+.picture i:nth-of-type(4){right:-6.4mm;bottom:-6.4mm;border-right-width:1.5pt;border-bottom-width:1.5pt}
+.picture em{position:absolute;right:2.6mm;bottom:1.8mm;font-style:normal;font-size:7.6pt;color:#c2b39b}
+.picture .hint{position:absolute;inset:0;display:grid;place-items:center;font-size:9pt;color:#d6cab6}
+.steps3{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm;margin-top:1.4mm}
+.steps3 div{border-top:.8pt solid var(--gold);padding-top:1.6mm;font-size:8.9pt;line-height:1.45}
+.steps3 b{display:block;font-size:9.6pt;color:var(--brown);margin-bottom:.2mm}
+
+/* ---------- 미션 4 ---------- */
+.challenges{display:grid;grid-template-columns:repeat(4,1fr);gap:2.8mm}
+.ch{border:.8pt solid var(--brown);background:#fff9ee;padding:2.2mm 2.6mm 2.4mm;display:flex;flex-direction:column;gap:1mm}
+.ch h3{margin:0;font-size:10.4pt;color:var(--ink);border-bottom:.5pt solid var(--gold2);padding-bottom:.8mm}
+.ch h3 small{color:var(--gold);font-size:8.4pt;margin-right:1.2mm}
+.ch p{margin:0;font-size:8.7pt;line-height:1.42;color:var(--soft);flex:1}
+.ch .ok{display:flex;align-items:center;gap:1.4mm;font-size:8.8pt;color:var(--red);font-weight:700}
+.ch .ok::before{content:"";width:3.6mm;height:3.6mm;border:1pt solid var(--red)}
+.why{margin:2.4mm 0 0;font-size:8.8pt;color:var(--soft);text-align:center}
+
+/* ---------- 미션 5 ---------- */
+table{width:100%;border-collapse:collapse;font-size:9.2pt;background:#fff9ee}
+th,td{border:.8pt solid var(--brown);padding:1.4mm 2.2mm;text-align:left;vertical-align:middle}
+th{background:#efe2c4;font-weight:700}
+td{height:10mm}
+.stars{font-size:13pt;letter-spacing:1.2pt;color:var(--gold);white-space:nowrap}
+.me{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm;margin-top:1mm}
+.me div{border-left:1.6pt solid var(--gold);padding:.6mm 0 .6mm 2.6mm;font-size:8.9pt;line-height:1.4;display:flex;flex-direction:column;gap:.2mm}
+.me .stars{font-size:12pt}
+h4{display:flex;align-items:center;gap:2.6mm;margin:2.6mm 0 1.2mm;font-size:11pt}
+h4::after{content:"";flex:1;height:.6pt;background:var(--gold2)}
+
+footer{margin-top:auto;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;font-size:7.6pt;color:#8c7a62;letter-spacing:.5pt}
+footer span:last-child{text-align:right}
 </style>
 </head>
 <body>
 
-<div class="page">
- <header class="top">
-  <div><div class="brand">오르골당 · Music Box Workroom</div><h1>나만의 오르골 만들기</h1></div>
-  <div class="who">학년<span></span>반<span></span>번호<span></span>이름<span class="name"></span></div>
- </header>
+<svg width="0" height="0" style="position:absolute"><defs>
+ <symbol id="curl" viewBox="0 0 60 60"><path d="M4 56 V22 C4 10 12 4 24 4 H56"/><path d="M10 50 V26 C10 16 16 10 26 10 H50"/><path d="M24 4 C18 12 22 20 30 18 C36 16 34 8 28 10"/><path d="M4 22 C12 18 20 22 18 30 C16 36 8 34 10 28"/></symbol>
+</defs></svg>
 
- <section>
-  <h2><b>1</b>오르골당 사용 방법</h2>
-  <p class="lead">mbworkroom-75288.web.app 에 들어가 순서대로 해 보세요. 화면 위 '사용 방법' 버튼을 누르면 자세한 안내가 나와요.</p>
-  <div class="steps">
-   <div class="step"><img src="img/disc.jpg" alt=""><p><span class="num">1</span><b>음 찍기</b><br>원판의 동그라미를 누르면 음이 찍혀요.<br>안쪽은 낮은 음, 바깥쪽은 높은 음이에요.</p></div>
-   <div class="step"><img src="img/wind.jpg" alt=""><p><span class="num">2</span><b>태엽 감고 듣기</b><br>나무 손잡이를 위아래로 끌었다가 놓으면 연주가 시작돼요.</p></div>
-   <div class="step"><img src="img/decor.jpg" alt=""><p><span class="num">3</span><b>상자 꾸미기</b><br>뚜껑 속 풍경을 고르거나 내가 그린 그림을 넣어요.</p></div>
-   <div class="step"><img src="img/share.jpg" alt=""><p><span class="num">4</span><b>공유하기</b><br>링크를 복사해 친구에게 보내면 친구가 내 오르골을 들을 수 있어요.</p></div>
-  </div>
- </section>
+<!-- ======================= 1쪽 ======================= -->
+<div class="sheet">
+ <div class="frame"></div>
+ <svg class="corner tl"><use href="#curl"/></svg><svg class="corner tr"><use href="#curl"/></svg>
+ <svg class="corner bl"><use href="#curl"/></svg><svg class="corner br"><use href="#curl"/></svg>
+ <div class="page">
 
- <section style="flex:1;display:flex;flex-direction:column">
-  <h2><b>2</b>어떤 음악을 만들고 싶나요?</h2>
-  <p class="lead">정답은 없어요. 떠오르는 대로 자유롭게 적어 보세요.</p>
-  <div class="row"><span class="q">내 음악의 느낌</span>
-   <div class="chips"><span>신나는</span><span>잔잔한</span><span>신비로운</span><span>따뜻한</span><span>쓸쓸한</span><span>귀여운</span><span>웅장한</span><span>기타 (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</span></div></div>
-  <div class="row"><span class="q">떠오르는 장면</span><span class="hint">(언제, 어디서, 누구와 듣고 싶은 음악인가요?)</span></div>
-  <div class="lines"><span class="line"></span><span class="line"></span></div>
-  <div class="row" style="margin-top:4mm"><span class="q">원판 음 수</span><div class="choose"><span>4음</span><span>6음</span><span>8음</span><span>12음</span></div>
-   <span class="q" style="margin-left:6mm">원판 길이</span><div class="choose"><span>짧게</span><span>길게</span></div></div>
-  <p class="hint" style="margin:0">처음이라면 4음과 짧은 원판이 쉬워요. 음이 많을수록 다양한 가락을 만들 수 있어요.</p>
-  <div class="row" style="margin-top:3mm"><span class="q">내 음악에 어울리는 낱말 세 개</span></div>
-  <div class="row"><span class="line"></span><span class="line"></span><span class="line"></span></div>
-  <div class="row" style="margin-top:3mm"><span class="q">작품 제목</span><span class="line"></span></div>
-  <div class="row" style="margin-top:3mm"><span class="q">만들고 나서: 내 오르골에서 가장 마음에 드는 부분</span></div>
-  <div class="lines"><span class="line"></span><span class="line"></span></div>
- </section>
- <footer><span>오르골당 · Music Box Workroom</span><span>1 / 2</span><span>© 2026 Kikeunssam</span></footer>
+  <header class="hero">
+   <div>
+    <img class="logo" src="img/logo.png" alt="오르골당 Music Box Workroom">
+    <h1>나는 오르골 작곡가</h1>
+    <p class="sub"><span class="orn">❦</span> 황동 원판에 음을 찍어 나만의 오르골 음악을 만들고, 친구와 함께 들어 봐요.</p>
+    <div class="who">학년<span style="width:10mm"></span>반<span style="width:10mm"></span>번호<span style="width:10mm"></span>이름<span style="width:36mm"></span></div>
+   </div>
+   <div class="qr"><img src="img/qr.svg" alt="오르골당 QR 코드"><span>QR 코드를 찍으면<br>오르골당이 열려요</span></div>
+  </header>
+
+  <section class="chap">
+   <h2><span class="label learn">알아보기</span>오르골은 어떻게 연주될까요?</h2>
+   <div class="flow">
+    <div class="how"><div class="pic"><img src="img/how_key.png" alt="태엽 열쇠"></div><p><b>① 태엽 감기</b>태엽을 감으면 원판이 천천히 돌아요.</p></div>
+    <div class="arrow">❯</div>
+    <div class="how"><div class="pic"><img src="img/how_disc.png" alt="구멍이 뚫린 황동 원판"></div><p><b>② 원판의 돌기</b>원판에 찍힌 돌기가 별바퀴를 톡 밀어요.</p></div>
+    <div class="arrow">❯</div>
+    <div class="how"><div class="pic"><img src="img/how_star.png" alt="별바퀴"></div><p><b>③ 별바퀴</b>별바퀴가 돌면서 금속 빗살을 튕겨요.</p></div>
+    <div class="arrow">❯</div>
+    <div class="how"><div class="pic"><img src="img/how_comb.png" alt="길이가 다른 금속 빗살"></div><p><b>④ 금속 빗살</b>빗살이 떨리며 맑은 소리가 나요.</p></div>
+   </div>
+   <p class="fact"><b>알고 있나요?</b>빗살이 짧을수록 높은 소리가 나요. 그래서 오르골의 빗살은 길이가 모두 달라요.</p>
+  </section>
+
+  <section class="chap">
+   <h2><span class="label">미션 1</span>소리 탐험대</h2>
+   <p class="lead">오르골당에서 직접 해 보고, 알맞은 말에 ○ 하세요.</p>
+   <ol class="quiz">
+    <li><i>Ⅰ.</i>원판의 안쪽 줄에 음을 찍으면<span class="pick"><span>낮은 소리</span><span>높은 소리</span></span>가 나요.</li>
+    <li><i>Ⅱ.</i>같은 방향의 선 위에 음을 두 개 찍으면<span class="pick"><span>한 음만</span><span>두 음이 함께</span></span>울려요.</li>
+    <li><i>Ⅲ.</i>태엽을 많이 감을수록 음악이<span class="pick"><span>짧게</span><span>길게</span></span>연주돼요.</li>
+    <li><i>Ⅳ.</i>태엽이 남아 있으면 원판이 한 바퀴를 돈 뒤<span class="pick"><span>멈춰요</span><span>처음부터 다시 연주돼요</span></span></li>
+   </ol>
+  </section>
+
+  <section class="chap" style="flex:1;display:flex;flex-direction:column">
+   <h2><span class="label">미션 2</span>어떤 음악을 만들까요?</h2>
+   <p class="lead">정답은 없어요. 마음에 떠오르는 음악을 자유롭게 골라 보세요. (여러 개 골라도 좋아요)</p>
+   <div class="moods"><span>신나는</span><span>잔잔한</span><span>신비로운</span><span>따뜻한</span><span>쓸쓸한</span><span>귀여운</span><span>웅장한</span><span>설레는</span><span>(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</span></div>
+   <div class="field"><b>음악 속 장면</b><span class="ln"></span><small>언제, 어디서 들리는 음악인가요?</small></div>
+   <div class="field"><b>들려주고 싶은 사람</b><span class="ln"></span><b>그 까닭</b><span class="ln"></span></div>
+   <div class="field"><b>원판 고르기</b><span class="pick"><span>4음</span><span>6음</span><span>8음</span><span>12음</span></span><b style="margin-left:3mm">길이</b><span class="pick"><span>짧게</span><span>길게</span></span><small>처음이라면 4음, 짧은 원판부터!</small></div>
+   <div class="field"><b>한 줄 소개</b><span class="ln"></span></div>
+   <p class="ex" style="margin-bottom:3mm">예) 눈 내리는 밤, 고양이가 꿈속에서 듣는 잔잔한 음악이에요.</p>
+   <div class="titleplate"><b>내 작품 제목</b><span class="ln"></span></div>
+  </section>
+
+  <footer><span>오르골당 · Music Box Workroom</span><span>― 1 ―</span><span>© 2026 Kikeunssam</span></footer>
+ </div>
 </div>
 
-<div class="page">
- <section>
-  <h2><b>3</b>오르골 뚜껑에 들어갈 그림 그리기</h2>
-  <p class="lead">내 음악과 어울리는 풍경을 아래 칸 안에 꽉 채워 그려요. 이 칸은 오르골 뚜껑 속 풍경과 같은 모양(가로 8 : 세로 3)이에요.</p>
-  <div class="frame"><i></i><i></i><i></i><i></i><em>가로 8 : 세로 3</em></div>
-  <div class="upload">
-   <div><b>① 사진 찍기</b>빨간 모서리 표시가 화면에 다 들어오게, 그림을 위에서 똑바로 찍어요. 그림자가 지지 않게 밝은 곳에서 찍어요.</div>
-   <div><b>② 사진 넣기</b>'상자 꾸미기'의 '내 사진 넣기'를 누르고 찍은 사진을 골라요.</div>
-   <div><b>③ 맞추고 적용</b>그림을 끌어 위치를, '확대'로 크기를 맞추고 색감을 고른 뒤 '풍경에 적용'을 눌러요.</div>
-  </div>
- </section>
+<!-- ======================= 2쪽 ======================= -->
+<div class="sheet">
+ <div class="frame"></div>
+ <svg class="corner tl"><use href="#curl"/></svg><svg class="corner tr"><use href="#curl"/></svg>
+ <svg class="corner bl"><use href="#curl"/></svg><svg class="corner br"><use href="#curl"/></svg>
+ <div class="page">
 
- <section style="flex:1">
-  <h2><b>4</b>친구 오르골 감상하기</h2>
-  <p class="lead">친구가 보내 준 링크를 열고 태엽을 감아 들어 보세요. 들은 느낌과 좋았던 점을 적어 친구에게 알려 주세요.</p>
-  <table>
-   <tr><th style="width:15%">친구 이름</th><th style="width:21%">작품 제목</th><th style="width:30%">들은 느낌</th><th>좋았던 점 한 가지</th></tr><tr><td></td><td></td><td><span class="feel">신나는 · 잔잔한 · 신비로운 · (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</span></td><td></td></tr><tr><td></td><td></td><td><span class="feel">신나는 · 잔잔한 · 신비로운 · (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</span></td><td></td></tr><tr><td></td><td></td><td><span class="feel">신나는 · 잔잔한 · 신비로운 · (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</span></td><td></td></tr><tr><td></td><td></td><td><span class="feel">신나는 · 잔잔한 · 신비로운 · (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</span></td><td></td></tr>
-   
-   
-   
-  </table>
-  <div class="row" style="margin-top:4mm"><span class="q">친구가 내 오르골을 듣고 해 준 말</span></div>
-  <div class="lines"><span class="line"></span><span class="line"></span></div>
- </section>
- <footer><span>오르골당 · Music Box Workroom</span><span>2 / 2</span><span>© 2026 Kikeunssam</span></footer>
+  <section class="chap">
+   <h2><span class="label">미션 3</span>오르골 뚜껑에 들어갈 그림 그리기</h2>
+   <p class="lead">내 음악과 어울리는 풍경을 액자 안에 꽉 채워 그려요. 이 액자는 오르골 뚜껑 속 풍경과 같은 모양(가로 8 : 세로 3)이에요.</p>
+   <div class="picture"><div class="canvas"></div><i></i><i></i><i></i><i></i><span class="hint">여기에 그려요</span><em>가로 8 : 세로 3</em></div>
+   <div class="steps3">
+    <div><b>① 사진 찍기</b>빨간 모서리 표시가 모두 보이게, 그림을 위에서 똑바로 찍어요.</div>
+    <div><b>② 내 사진 넣기</b>'상자 꾸미기'의 '내 사진 넣기'를 누르고 찍은 사진을 골라요.</div>
+    <div><b>③ 맞추고 적용</b>위치와 크기, 색감을 맞추고 '풍경에 적용'을 눌러요.</div>
+   </div>
+  </section>
+
+  <section class="chap">
+   <h2><span class="label">미션 4</span>작곡 도전 카드</h2>
+   <p class="lead">오르골당에서 음악을 만들며 도전해 보세요. 성공하면 □에 ✓ 하세요.</p>
+   <div class="challenges">
+    <div class="ch"><h3><small>Ⅰ</small>되풀이하기</h3><p>마음에 드는 가락을 한 번 더 똑같이 찍어 보세요.</p><span class="ok">성공</span></div>
+    <div class="ch"><h3><small>Ⅱ</small>화음 넣기</h3><p>같은 방향 선 위에 두 음을 찍어 함께 울려 보세요.</p><span class="ok">성공</span></div>
+    <div class="ch"><h3><small>Ⅲ</small>쉼 만들기</h3><p>아무 음도 찍지 않은 칸을 두어 잠깐 쉬어 보세요.</p><span class="ok">성공</span></div>
+    <div class="ch"><h3><small>Ⅳ</small>'도'로 끝내기</h3><p>마지막 음을 '도'로 찍어 음악을 편안하게 마쳐 보세요.</p><span class="ok">성공</span></div>
+   </div>
+   <p class="why">되풀이하면 가락이 기억에 남고, 쉼은 음악이 숨을 쉬게 해 줘요. '도'로 끝나면 음악이 끝났다는 느낌이 들어요.</p>
+  </section>
+
+  <section class="chap" style="flex:1">
+   <h2><span class="label">미션 5</span>친구 오르골 감상회</h2>
+   <p class="lead">친구가 보내 준 링크를 열고 태엽을 감아 들어 보세요. 별에 색칠하고, 칭찬 한마디를 남겨요.</p>
+   <table>
+    <tr><th style="width:17%">친구 이름</th><th style="width:22%">작품 제목</th><th style="width:25%">음악과 그림이 어울려요</th><th>칭찬 한마디</th></tr>
+    <tr><td></td><td></td><td class="stars">☆☆☆☆☆</td><td></td></tr>
+    <tr><td></td><td></td><td class="stars">☆☆☆☆☆</td><td></td></tr>
+    <tr><td></td><td></td><td class="stars">☆☆☆☆☆</td><td></td></tr>
+   </table>
+   <h4><span class="label learn">돌아보기</span>오늘 활동</h4>
+   <div class="me">
+    <div>원판에 음을 찍어 나만의 가락을 만들었어요.<span class="stars">☆☆☆</span></div>
+    <div>내 음악에 어울리는 그림을 그렸어요.<span class="stars">☆☆☆</span></div>
+    <div>친구의 음악을 귀 기울여 듣고 칭찬했어요.<span class="stars">☆☆☆</span></div>
+   </div>
+  </section>
+
+  <footer><span>오르골당 · Music Box Workroom</span><span>― 2 ―</span><span>© 2026 Kikeunssam</span></footer>
+ </div>
 </div>
 
 </body>

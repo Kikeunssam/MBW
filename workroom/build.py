@@ -8,7 +8,10 @@ wind_sample=re.search(r'"([A-Za-z0-9+/=]+)"',samples).group(1)
 page=(p/'page.html').read_text().replace('@@CSS@@',css).replace('@@JS@@',(p/'spring.js').read_text()+'\n'+(p/'workshop.js').read_text()+'\n'+(p/'share.js').read_text()+'\n'+(p/'guide.js').read_text()).replace('@@ASSETS@@',json.dumps({f.stem:uri(f,'image/png') for f in (p/'stage').glob('*.png') if not f.stem.startswith('nav_')}))
 for icon in (p/'stage').glob('nav_*.png'):
     page=page.replace('@@NAV_'+icon.stem[4:]+'@@',uri(icon,'image/png'))
-page=page.replace('@@LESSON@@',uri(p/'music_box_lesson.pdf','application/pdf'))
+# 수업 활동지는 페이지에 넣지 않고 index.html 옆의 별도 파일로 둔다 (첫 화면을 가볍게)
+import shutil
+shutil.copyfile(p/'music_box_lesson.pdf', p.parent/'music_box_lesson.pdf')
+page=page.replace('@@LESSON@@','music_box_lesson.pdf')
 # '사용 방법' 그림 (workroom/guide/*.png, tools: workroom/make_guide_images.py)
 for shot in (p/'guide').glob('*.png'):
     page=page.replace('@@GUIDE_'+shot.stem+'@@',uri(shot,'image/png'))

@@ -6,4 +6,5 @@ cd "$(dirname "$0")/.."
 python3 workroom/build.py
 mkdir -p public
 cp index.html public/index.html
+cp music_box_lesson.pdf public/music_box_lesson.pdf
 firebase deploy --only hosting --project mbworkroom-75288
