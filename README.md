@@ -3,7 +3,7 @@
 A web app for primary school pupils to make their own disc music box tunes.
 Place notes on the brass disc, wind the key, and the disc turns and plays.
 
-**Site:** https://kikeunssam.github.io/MBW/
+**Site:** https://mbworkroom-75288.web.app (Firebase Hosting) · backup: https://kikeunssam.github.io/MBW/ (GitHub Pages)
 
 ## What you can do
 
@@ -37,6 +37,22 @@ After changing the source, regenerate `index.html` (Python 3, no extra packages)
 
 ```bash
 python3 workroom/build.py
+```
+
+## Deploying
+
+```bash
+sh tools/deploy.sh      # build index.html → copy to public/ → deploy to Firebase Hosting (mbworkroom-75288)
+git push                # GitHub Pages (backup address) updates automatically from main
+```
+
+## Lesson worksheet
+
+Print `workroom/lesson/worksheet.html` to PDF with Chrome as `workroom/music_box_lesson.pdf`; the build puts it behind the '수업자료 받기' (download lesson material) button.
+
+```bash
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --no-pdf-header-footer \
+  --print-to-pdf=workroom/music_box_lesson.pdf "file://$PWD/workroom/lesson/worksheet.html"
 ```
 
 ## Licences
