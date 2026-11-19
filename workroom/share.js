@@ -1,6 +1,6 @@
 // A link contains only the displayed disc and its chosen scenery.
 // 공유 링크는 지금 열린 사이트 주소로 만든다 (GitHub Pages든 다른 곳이든). 파일로 열었을 때만 기본 주소를 쓴다.
-const publishedWorkroom=/^https?:$/.test(location.protocol)?location.href.split('#')[0]:'https://kikeunssam.github.io/MBW/';
+const publishedWorkroom=/^https?:$/.test(location.protocol)?location.href.split('#')[0]:'https://mbworkroom-75288.web.app/';
 function shareSnapshot(){
  const {level,theme,title,photo}=state,n=state.lengths[level];
  return {v:1,title:title||'',theme,level,n,notes:state.tracks[level].map(row=>row.slice(0,n).join('')),photo:theme===4?photo:null};

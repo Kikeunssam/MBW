@@ -331,3 +331,6 @@ dialog.infoPopup.guidePopup[open]{display:flex}
 #gridDialog .zoomBar h2{margin-right:auto}
 #gridDialog .zoomBar button{display:inline-flex;align-items:center;gap:6px}
 #gridWind .btnIcon{width:26px;height:26px;margin:-4px 0;image-rendering:auto}
+
+/* 이름판 안내 문구 "작품 제목을 입력하세요"가 작은 화면에서도 이름판 안에 들어가게 */
+.nameplate input::placeholder{font-size:clamp(8.5px,2.25cqw,20px)}

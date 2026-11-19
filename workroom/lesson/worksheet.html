@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>오르골당 음악 창작 활동지</title>
+<style>
+@font-face{font-family:gal;src:url(../../assets/fonts/galmuri11.ttf)}
+@page{size:A4;margin:12mm 13mm}
+*{box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{margin:0;font:10.5pt/1.55 "Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;color:#222;word-break:keep-all}
+.page{height:272mm;display:flex;flex-direction:column;gap:4mm;break-after:page;position:relative}
+.page:last-child{break-after:auto}
+header.top{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2.2pt solid #5a3a28;padding-bottom:2.5mm}
+.brand{font:9pt gal,sans-serif;color:#8a5a2b;letter-spacing:.5pt}
+h1{margin:1mm 0 0;font:21pt gal,sans-serif;color:#3b2418}
+.who{font-size:10pt;white-space:nowrap}
+.who span{display:inline-block;border-bottom:1pt solid #555;min-width:13mm;margin:0 3mm 0 1.5mm}
+.who span.name{min-width:30mm;margin-right:0}
+h2{margin:0 0 2mm;font:13.5pt gal,sans-serif;color:#3b2418;display:flex;align-items:center;gap:2.5mm}
+h2 b{display:inline-grid;place-items:center;width:7mm;height:7mm;border-radius:50%;background:#e8bd79;color:#3b2418;font:11pt gal,sans-serif}
+.lead{margin:0 0 2.5mm;color:#444}
+section{border:1pt solid #c9a777;border-radius:2.5mm;padding:3.5mm 4.5mm}
+/* 1. 사용 방법 */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:3mm}
+.step{display:flex;flex-direction:column;gap:1.5mm}
+.step img{width:100%;height:24mm;object-fit:cover;border:.8pt solid #8a6a45;border-radius:1.5mm}
+.step p{margin:0;font-size:9.4pt;line-height:1.45}
+.step p b{color:#7a3f1c}
+.num{display:inline-grid;place-items:center;width:5mm;height:5mm;border-radius:50%;background:#3b2418;color:#fff;font:8pt gal,sans-serif;margin-right:1mm;vertical-align:.3mm}
+/* 2. 어떤 음악 */
+.row{display:flex;gap:3mm;align-items:baseline;margin:1.8mm 0}
+.row .q{flex:none;font-weight:600;color:#3b2418}
+.chips{display:flex;flex-wrap:wrap;gap:2mm 3.5mm}
+.chips span::before{content:"";display:inline-block;width:3.6mm;height:3.6mm;border:1pt solid #555;border-radius:.6mm;margin-right:1.2mm;vertical-align:-.6mm}
+.line{flex:1;border-bottom:1pt solid #777;height:6mm}
+.lines .line{display:block;margin-top:2mm}
+.choose{display:flex;gap:5mm}
+.choose span{border:1pt solid #999;border-radius:5mm;padding:.3mm 3mm}
+.hint{font-size:9pt;color:#6b5a48}
+/* 3. 그림 칸 (뚜껑 풍경과 같은 8:3) */
+.frame{position:relative;width:94%;aspect-ratio:8/3;border:2.4pt solid #3b2418;outline:1pt solid #3b2418;outline-offset:1.6mm;margin:5mm auto 6.5mm}
+.frame i{position:absolute;width:5mm;height:5mm;border-color:#c0392b;border-style:solid;border-width:0}
+.frame i:nth-child(1){left:-4mm;top:-4mm;border-left-width:1.2pt;border-top-width:1.2pt}
+.frame i:nth-child(2){right:-4mm;top:-4mm;border-right-width:1.2pt;border-top-width:1.2pt}
+.frame i:nth-child(3){left:-4mm;bottom:-4mm;border-left-width:1.2pt;border-bottom-width:1.2pt}
+.frame i:nth-child(4){right:-4mm;bottom:-4mm;border-right-width:1.2pt;border-bottom-width:1.2pt}
+.frame em{position:absolute;right:2mm;bottom:1.5mm;font:normal 8pt sans-serif;color:#aaa}
+.upload{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm;margin-top:1mm}
+.upload div{background:#f7efe2;border-radius:2mm;padding:2.2mm 3mm;font-size:9.3pt;line-height:1.45}
+.upload div b{display:block;color:#7a3f1c;margin-bottom:.5mm}
+/* 4. 친구 감상 */
+table{width:100%;border-collapse:collapse;font-size:9.6pt}
+th,td{border:1pt solid #8a6a45;padding:1.6mm 2mm;text-align:left;vertical-align:top}
+th{background:#f3e6d0;color:#3b2418;font-weight:600}
+td{height:16mm}
+td.small{height:9mm}
+.feel{font-size:8.6pt;color:#6b5a48}
+footer{margin-top:auto;display:flex;justify-content:space-between;font-size:8pt;color:#8a7560;border-top:.8pt solid #c9a777;padding-top:1.5mm}
+</style>
+</head>
+<body>
+
+<div class="page">
+ <header class="top">
+  <div><div class="brand">오르골당 · Music Box Workroom</div><h1>나만의 오르골 만들기</h1></div>
+  <div class="who">학년<span></span>반<span></span>번호<span></span>이름<span class="name"></span></div>
+ </header>
+
+ <section>
+  <h2><b>1</b>오르골당 사용 방법</h2>
+  <p class="lead">mbworkroom-75288.web.app 에 들어가 순서대로 해 보세요. 화면 위 '사용 방법' 버튼을 누르면 자세한 안내가 나와요.</p>
+  <div class="steps">
+   <div class="step"><img src="img/disc.jpg" alt=""><p><span class="num">1</span><b>음 찍기</b><br>원판의 동그라미를 누르면 음이 찍혀요.<br>안쪽은 낮은 음, 바깥쪽은 높은 음이에요.</p></div>
+   <div class="step"><img src="img/wind.jpg" alt=""><p><span class="num">2</span><b>태엽 감고 듣기</b><br>나무 손잡이를 위아래로 끌었다가 놓으면 연주가 시작돼요.</p></div>
+   <div class="step"><img src="img/decor.jpg" alt=""><p><span class="num">3</span><b>상자 꾸미기</b><br>뚜껑 속 풍경을 고르거나 내가 그린 그림을 넣어요.</p></div>
+   <div class="step"><img src="img/share.jpg" alt=""><p><span class="num">4</span><b>공유하기</b><br>링크를 복사해 친구에게 보내면 친구가 내 오르골을 들을 수 있어요.</p></div>
+  </div>
+ </section>
+
+ <section style="flex:1;display:flex;flex-direction:column">
+  <h2><b>2</b>어떤 음악을 만들고 싶나요?</h2>
+  <p class="lead">정답은 없어요. 떠오르는 대로 자유롭게 적어 보세요.</p>
+  <div class="row"><span class="q">내 음악의 느낌</span>
+   <div class="chips"><span>신나는</span><span>잔잔한</span><span>신비로운</span><span>따뜻한</span><span>쓸쓸한</span><span>귀여운</span><span>웅장한</span><span>기타 (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</span></div></div>
+  <div class="row"><span class="q">떠오르는 장면</span><span class="hint">(언제, 어디서, 누구와 듣고 싶은 음악인가요?)</span></div>
+  <div class="lines"><span class="line"></span><span class="line"></span></div>
+  <div class="row" style="margin-top:4mm"><span class="q">원판 음 수</span><div class="choose"><span>4음</span><span>6음</span><span>8음</span><span>12음</span></div>
+   <span class="q" style="margin-left:6mm">원판 길이</span><div class="choose"><span>짧게</span><span>길게</span></div></div>
+  <p class="hint" style="margin:0">처음이라면 4음과 짧은 원판이 쉬워요. 음이 많을수록 다양한 가락을 만들 수 있어요.</p>
+  <div class="row" style="margin-top:3mm"><span class="q">내 음악에 어울리는 낱말 세 개</span></div>
+  <div class="row"><span class="line"></span><span class="line"></span><span class="line"></span></div>
+  <div class="row" style="margin-top:3mm"><span class="q">작품 제목</span><span class="line"></span></div>
+  <div class="row" style="margin-top:3mm"><span class="q">만들고 나서: 내 오르골에서 가장 마음에 드는 부분</span></div>
+  <div class="lines"><span class="line"></span><span class="line"></span></div>
+ </section>
+ <footer><span>오르골당 · Music Box Workroom</span><span>1 / 2</span><span>© 2026 Kikeunssam</span></footer>
+</div>
+
+<div class="page">
+ <section>
+  <h2><b>3</b>오르골 뚜껑에 들어갈 그림 그리기</h2>
+  <p class="lead">내 음악과 어울리는 풍경을 아래 칸 안에 꽉 채워 그려요. 이 칸은 오르골 뚜껑 속 풍경과 같은 모양(가로 8 : 세로 3)이에요.</p>
+  <div class="frame"><i></i><i></i><i></i><i></i><em>가로 8 : 세로 3</em></div>
+  <div class="upload">
+   <div><b>① 사진 찍기</b>빨간 모서리 표시가 화면에 다 들어오게, 그림을 위에서 똑바로 찍어요. 그림자가 지지 않게 밝은 곳에서 찍어요.</div>
+   <div><b>② 사진 넣기</b>'상자 꾸미기'의 '내 사진 넣기'를 누르고 찍은 사진을 골라요.</div>
+   <div><b>③ 맞추고 적용</b>그림을 끌어 위치를, '확대'로 크기를 맞추고 색감을 고른 뒤 '풍경에 적용'을 눌러요.</div>
+  </div>
+ </section>
+
+ <section style="flex:1">
+  <h2><b>4</b>친구 오르골 감상하기</h2>
+  <p class="lead">친구가 보내 준 링크를 열고 태엽을 감아 들어 보세요. 들은 느낌과 좋았던 점을 적어 친구에게 알려 주세요.</p>
+  <table>
+   <tr><th style="width:15%">친구 이름</th><th style="width:21%">작품 제목</th><th style="width:30%">들은 느낌</th><th>좋았던 점 한 가지</th></tr><tr><td></td><td></td><td><span class="feel">신나는 · 잔잔한 · 신비로운 · (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</span></td><td></td></tr><tr><td></td><td></td><td><span class="feel">신나는 · 잔잔한 · 신비로운 · (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</span></td><td></td></tr><tr><td></td><td></td><td><span class="feel">신나는 · 잔잔한 · 신비로운 · (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</span></td><td></td></tr><tr><td></td><td></td><td><span class="feel">신나는 · 잔잔한 · 신비로운 · (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</span></td><td></td></tr>
+   
+   
+   
+  </table>
+  <div class="row" style="margin-top:4mm"><span class="q">친구가 내 오르골을 듣고 해 준 말</span></div>
+  <div class="lines"><span class="line"></span><span class="line"></span></div>
+ </section>
+ <footer><span>오르골당 · Music Box Workroom</span><span>2 / 2</span><span>© 2026 Kikeunssam</span></footer>
+</div>
+
+</body>
+</html>

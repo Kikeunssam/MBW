@@ -25,8 +25,13 @@ scene.js
 storage.js
 style.css
 ui.js
-tools/
+tools/*
+!tools/deploy.sh
 assets/*
 !assets/fonts/
 !assets/palette.json
 sounds/musicbox-samples.js.bak
+
+# Firebase 배포 폴더 (tools/deploy.sh가 index.html을 복사해 만든다)
+public/
+.firebase/
