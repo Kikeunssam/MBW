@@ -81,6 +81,9 @@ function drawHandle(){
   ctx.drawImage(grip,204,end-24);
 }
 let handleOffset=81;
+// 태엽이 이만큼(98%) 이상 감겨 있으면 '가득 참'으로 본다 — 연주 중에 조금씩 풀린 틈을 다시 채우며 딸깍 소리가 나지 않게
+const FULL=.98;
+const isFull=extra=>currentDrive(ac?.currentTime||0).energy+(extra||0)>=spring.capacity*FULL;
 let clickBuffer,clickLoad,lastClick=-1;
 function loadWinding(){
   if(!clickLoad)clickLoad=ac.decodeAudioData(Uint8Array.from(atob('@@WINDER_AUDIO@@'),c=>c.charCodeAt(0)).buffer).then(b=>clickBuffer=b).catch(()=>{clickLoad=null});
@@ -105,14 +108,16 @@ function attachWinder(){
   el.onpointerdown=e=>{
     if(gesture||e.button!==0)return;
     e.preventDefault();sound().then(loadWinding).catch(()=>{});el.setPointerCapture(e.pointerId);
-    gesture={id:e.pointerId,lastY:e.clientY,pixels:0,added:0};
+    gesture={id:e.pointerId,lastY:e.clientY,pixels:0,added:0,full:isFull()};
   };
   el.onpointermove=e=>{
     if(!gesture||gesture.id!==e.pointerId)return;
     const dy=e.clientY-gesture.lastY,distance=Math.abs(dy);
     handleOffset=Math.max(-84,Math.min(84,handleOffset+dy*350/$('handle').getBoundingClientRect().width));
-    const room=Math.max(0,spring.capacity-currentDrive(ac?.currentTime||0).energy-gesture.added);
+    if(!gesture.full&&isFull(gesture.added))gesture.full=true;   // 한 번 가득 차면 손을 뗄 때까지 더 감기지 않고 소리도 없다
+    const room=gesture.full?0:Math.max(0,spring.capacity-currentDrive(ac?.currentTime||0).energy-gesture.added);
     const gained=Math.min(room,distance*spring.beatsPerTurn/160);
+    if(gained<=0)gesture.pixels=0;
     gesture.pixels+=gained*160/spring.beatsPerTurn;
     if(gesture.pixels>=9){gesture.pixels%=9;ratchet()}
     gesture.lastY=e.clientY;
@@ -125,6 +130,6 @@ function attachWinder(){
     if(added>0){halt();windBy(added*TAU/spring.beatsPerTurn);play()}
   }
   el.onpointerup=el.onpointercancel=el.onlostpointercapture=release;
-  el.onclick=e=>{if(e.detail===0&&!gesture&&currentDrive(ac?.currentTime||0).energy<spring.capacity-.001){halt();handleOffset=handleOffset>0?-81:81;windBy(TAU/2);sound().then(loadWinding).then(ratchet).catch(()=>{});play()}};
+  el.onclick=e=>{if(e.detail===0&&!gesture&&!isFull()){halt();handleOffset=handleOffset>0?-81:81;windBy(TAU/2);sound().then(loadWinding).then(ratchet).catch(()=>{});play()}};
   drawHandle();
 }
